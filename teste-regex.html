@@ -1,0 +1,20 @@
+<html>
+    <script>
+        
+        var alvo = '11a22b33c';
+        var exp = /(\d\d)(\w)/g;
+        var resultado = null;
+
+        // É utilizado para testar a regex, caso o mesmo obedecer o pattern ira retornar true
+        console.log(exp.test(alvo)); //true or false
+
+        // Depois de rodar o teste o regex vai considerar o último indice do teste
+        exp.lastIndex = 0; // resetando o indice do regex
+        // É utilizado para indicar todos resultados possíveis
+        while (resultado = exp.exec(alvo)) {
+            console.log(resultado);
+            console.log(exp.lastIndex);
+        }  
+
+    </script>
+</html>

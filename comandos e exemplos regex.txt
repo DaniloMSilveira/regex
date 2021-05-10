@@ -1,0 +1,128 @@
+Comandos:
+O "." informa que pode vir qualquer caractere
+O "d" informa que precisa ser um digito
+Digitos também podem ser colocados como "[0-9]", significando numeros de 0 a 9
+Colocando dentro de chaves "{}" um quantificador para o comando
+Os valores dentro de "[]" são filtrados no proximo caractere
+O "\s" é utilizado para indicar espaços
+O "?" significa que o caractere pode aparecer 0 ou 1 vezes
+O "*" significa que o caractere pode aparecer 0 ou mais vezes
+O "+" significa que o caractere pode aparecer 1 ou mais vezes
+O "^" dentro de "[]" indica em qual caractere vai parar a busca, podendo colocar uma virgula
+O "\w" significa que o caracter pode ser letra maiscula, minuscula ou número [A-Za-z0-9_]
+O "\b" indica a posição antes ou depois de uma palavra
+O "\B" indica a posição dentro de uma palavra
+O "^" indica que o texto a ser procurado no início
+O "$" indica que o texto a ser procurado no final
+Os "()" indicam grupos para o retorno do resultado da regex
+O "(?:)" indicado no começo do grupo indica que este grupo não será retornado no resultado da regex
+O "?" após um "+" (exemplo +?) significa que vai obter os textos até o primeiro indice encontrado
+
+Exemplos de regex para encontrar padrões em textos e extraílos
+
+extraindo o CPF
+João Fulano,123.456.789-00,21 de Maio de 1993,(21) 3079-9987,Rua do Ouvidor,50,20040-030,Rio de Janeiro
+
+regex a ser aplicado para extrair o CPF
+\d{3}[.-]?\d{3}[.-]?\d{3}[.-]?\d{2}
+
+regex a ser aplicado para extrair o CEP
+\d{5}\-\d{3}
+
+regex a ser aplicado para extrair o Telefone
+\(\d{2}\) \d{4}\-\d{4}
+
+regex a ser aplicado para extrair a data
+[0123]?\d\s+de\s+[A-Z][a-zç]{1,8}\s+de\s+[1-2]\d{3}
+
+extraindo o CNPJ
+15.123.321/8883-22
+
+regex a ser aplicado
+\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}
+
+No <code>for</code>, o valor de <code>i</code> começa de zero e é incrementado a cada volta enquanto <code>i < 10</code>, portando o bloco de código do for é executado 10 vezes.
+
+regex a ser aplicado para encontrar o <code> e </code>
+</?code>
+
+regex para obter padrão de horário: 19h32min16s
+\d*h[0-5]\dmin[0-5]\ds
+
+regex para obter padrão de placa de carro: KMG-8089
+[A-Z]{3}-\d{4}
+
+
+9.8 - Robson, 7.1 - Teresa, 4.5 - Armênio, 6.5 - Zulu, 7.7 - Stefania, 7.8 - João, 5.0 - Romeu, 7.2 - Pompilho, 3.1 - Reinaldo, 7.3 - Bernadete, 4.7 - Cinério 
+Regex para capturar os alunos que tirarem entre 7.2 até 7.9 para poder aprovalos
+7\.[2-9]\s+-\s+[^,]+
+
+BALEIRO GARROTE SERROTE GOLEIRO ROTEIRO
+Regex para capturar palavras que possui abreviação com ROT
+[A-Z]*ROT[A-Z]+
+
+Z171PZ7AZ23PZ7819AZ78GZ1AZ99IZ34O
+Procurar a palavra secreta referente a seguinte dica: cada letra da palavra recebe o prefixo Z, mas não apenas isso. A letra Z é seguida de um número com um ou mais dígitos.
+
+Regex a ser aplicado, separando os grupos para obter a palavra:
+Z\d+(\w)
+
+Caused by: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
+Regex a ser aplicado para separar a exception em duas partes, a causa e depois o motivo
+(Caused[\s\w:.]+):([\w\s]+)
+
+Desafio 1
+O email deve ter um @ e terminar com caelum.com.br ou alura.com.br. O nome do usuário (tudo antes do @) tem apenas letras minúsculas, pode ter um número no final e tem de 5 a 15 caracteres.
+Regex a ser aplicado:
+([a-z.]{4,14}[a-z\d])@(?:caelum.com.br|alura.com.br)
+
+Desafio 2
+Realizando a parte de validar um e-mail
+Deve-se aplicar o regex para permitir estes e-mails
+donkey.kong@kart.com.br
+bowser1@games.info 
+super-mario@nintendo.JP
+TEAM.donkey-kong@MARIO.kart1.nintendo.com
+
+Os abaixos não podem passar no regex
+toad@kart...com
+wario@kart@nintendo.com
+yoshi@nintendo
+daisy@nintendo.b
+..@email.com
+
+Regex a ser aplicado:
+^([\w-]\.?)+@([\w-]+\.)+([A-Za-z]{2,4})+$
+
+
+Desafio 3
+Separar os grupos para pegar as informações do Nome, Rua, numero e cidade (as outras informações são opcionais, não retornando no resultado)
+
+Nico Steppat|14/05/1977|Rua Buarque de Macedo|50|22222-222|Rio de Janeiro
+Romulo Henrique|14/06/1993|Rua do Lins|120|12345-322|Rio de Janeiro
+Leonardo Cordeiro|01/01/1995|Rua de Campo Grande|01|00001-234|Rio de Janeiro
+
+Regex a ser aplicado
+^([\w\s]+)\|(?:\d{2}\/\d{2}\/\d{4})\|([\w\s]+)\|([\w]+)\|(\d{5}-\d{3})\|(?:[\w\s]+)
+
+
+Alterando o formato de data com regex
+var exp = /-/g
+var anoMesDia = '22-04-2021';
+var novoAnoMesDia = anoMesDia.replace(exp, '/');
+console.log(novoAnoMesDia);
+
+Utilizando regex no split para definir um pattern
+var exp = /[,;-]/;
+var arquivo = '100,200-150,200;20';
+var valores = arquivo.split(exp);
+console.log(valores);
+
+Utilizando o comando match para encontrar todos códigos abaixos
+A121B12112C12212F12G01
+Dica:  todo código começa com uma letra seguida de 1 ou mais dígitos.
+
+var exp = /[A-Za-z]\d+/g
+var codigos = 'A121B12112C12212F12G01';
+var codigosExtraidos = codigos.match(exp);
+console.log(codigosExtraidos);
